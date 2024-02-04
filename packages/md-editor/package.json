@@ -1,0 +1,16 @@
+{
+  "name": "@backoffice/md-editor",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "license": "MIT",
+  "devDependencies": {
+    "@backoffice/typescript-config": "*"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "dependencies": {
+    "@mdxeditor/editor": "^2.7.0"
+  }
+}

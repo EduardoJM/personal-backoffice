@@ -2,9 +2,18 @@
   "name": "backoffice",
   "version": "1.0.0",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "freeze": "pip freeze > apps/server/requirements.txt"
   },
   "author": "Eduardo Oliveira <eduardo_y05@outlook.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "turbo": "^1.12.2",
+    "typescript": "^5.3.3"
+  }
 }
