@@ -1,0 +1,10 @@
+{
+  "name": "backoffice",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "freeze": "pip freeze > apps/server/requirements.txt"
+  },
+  "author": "Eduardo Oliveira <eduardo_y05@outlook.com>",
+  "license": "MIT"
+}
