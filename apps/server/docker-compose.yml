@@ -1,0 +1,66 @@
+version: '3.3'
+
+networks:
+  boffice:
+    driver: bridge
+
+services:
+  db:
+    image: postgres:15-alpine
+    volumes:
+      - backoffice_data:/var/lib/postgresql/data/
+    environment:
+      - TZ=America/Sao_Paulo
+      - POSTGRES_DB=backoffice
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=PeeCssaasaNqAs75oiMnaonfQSpPSXib
+    networks:
+      - boffice
+#
+#  redis:
+#    image: redis:alpine
+#    container_name: redis
+#    volumes:
+#      - ctrabalhista_redis:/data
+#    networks:
+#      - ctrabalhista
+
+  api:
+    build: .
+    entrypoint: ['./entrypoints/api.sh']
+    container_name: boffice_api
+    ports:
+      - 8000:8000
+    networks:
+      - boffice
+    volumes:
+      - ./src:/app
+      - ./media:/app/media
+    env_file:
+      - ./.env
+#    depends_on:
+#      - "db"
+#      - "redis"
+
+#  worker:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile.worker
+#    entrypoint: ['./entrypoints/worker.sh']
+#    container_name: worker
+#    volumes:
+#      - ./core:/app/core
+#      - ./features:/app/features
+#      - ./media:/app/media
+#      - ./placa.jpg:/app/placa.jpg
+#    networks:
+#      - ctrabalhista
+#    env_file:
+#      - ./.env
+#    depends_on:
+#      - "db"
+#      - "redis"
+#      - "api"
+
+volumes:
+  backoffice_data:
