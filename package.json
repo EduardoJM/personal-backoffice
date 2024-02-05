@@ -4,7 +4,8 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "freeze": "pip freeze > apps/server/requirements.txt"
+    "pip:install": "pip install -r apps/server/requirements.txt",
+    "pip:freeze": "pip freeze > apps/server/requirements.txt"
   },
   "author": "Eduardo Oliveira <eduardo_y05@outlook.com>",
   "license": "MIT",
