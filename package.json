@@ -15,6 +15,7 @@
   ],
   "devDependencies": {
     "turbo": "^1.12.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "@backoffice/eslint-config": "*"
   }
 }

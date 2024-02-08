@@ -4,10 +4,11 @@ import {
   listsPlugin,
   quotePlugin,
   thematicBreakPlugin,
-  toolbarPlugin
-} from '@mdxeditor/editor'
+  toolbarPlugin,
+  diffSourcePlugin,
+} from '@mdxeditor/editor';
 import { Toolbar } from './Toolbar';
-import '@mdxeditor/editor/style.css'
+import '@mdxeditor/editor/style.css';
 
 export interface MarkdownEditorProps {
   value: string;
@@ -28,7 +29,10 @@ export const MarkdownEditor = (props: MarkdownEditorProps) => {
         thematicBreakPlugin(),
         toolbarPlugin({
           toolbarContents: () => <Toolbar />,
-        })
+        }),
+        diffSourcePlugin({
+          viewMode: 'rich-text',
+        }),
       ]}
     />
   );

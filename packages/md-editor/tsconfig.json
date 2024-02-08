@@ -1,3 +1,4 @@
 {
-  "extends": "@backoffice/typescript-config"
+  "extends": "@backoffice/typescript-config",
+  "include": ["src"]
 }
