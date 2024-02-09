@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "core.api",
     "features.authentication",
+    "features.users",
     "features.notes",
 ]
 

@@ -4,6 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "docker exec -ti boffice_api python manage.py test"
+    "test": "docker exec -ti boffice_api python manage.py test",
+    "makemigrations": "docker exec -ti boffice_api python manage.py makemigrations",
+    "migrate": "docker exec -ti boffice_api python manage.py migrate"
   }
 }
