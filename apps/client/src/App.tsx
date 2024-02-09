@@ -1,61 +1,32 @@
-import { useState } from 'react'
-import Grid from '@mui/material/Grid';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
-import Typography from '@mui/material/Typography';
-import { MarkdownEditor } from '@backoffice/md-editor';
+import { Suspense } from 'react';
+import { QueryClientProvider, QueryClient } from 'react-query';
+import CssBaseline from '@mui/material/CssBaseline';
+import { AuthProvider } from './features/authentication/contexts';
+import Router from './router';
+import { BrowserRouter } from 'react-router-dom';
+
+const client = new QueryClient({
+  defaultOptions: {
+    queries: {
+      suspense: true,
+    },
+  },
+});
 
 function App() {
-  const [markdown, setMarkdown] = useState('# hello world');
-
   return (
-    <Grid container spacing={2} sx={{ height: '100vh' }}>
-      <Grid item xs={2}>
-        <List sx={{ width: '100%', maxWidth: '100%', bgcolor: 'background.paper' }}>
-          <ListItem alignItems="flex-start">
-            <ListItemText
-              primary="Brunch this weekend?"
-              secondary={
-                <>
-                  I'll be in your neighborhood doing errands this...
-                </>
-              }
-            />
-          </ListItem>
-          <Divider component="li" />
-          <ListItem alignItems="flex-start">
-            <ListItemText
-              primary="Brunch this weekend?"
-              secondary={
-                <>
-                  I'll be in your neighborhood doing errands this...
-                </>
-              }
-            />
-          </ListItem>
-          <Divider component="li" />
-          <ListItem alignItems="flex-start">
-            <ListItemText
-              primary="Brunch this weekend?"
-              secondary={
-                <>
-                  I'll be in your neighborhood doing errands this...
-                </>
-              }
-            />
-          </ListItem>
-        </List>
-      </Grid>
-      <Grid item xs={10}>
-        <MarkdownEditor
-          value={markdown}
-          onChange={setMarkdown}
-        />
-      </Grid>
-    </Grid>
-  );
-};
+    <Suspense fallback={<>Carregando...</>}>
+      <BrowserRouter>
+        <QueryClientProvider client={client}>
+          <AuthProvider>
+            <CssBaseline />
 
-export default App
+            <Router />
+          </AuthProvider>
+        </QueryClientProvider>
+      </BrowserRouter>
+    </Suspense>
+  );
+}
+
+export default App;
