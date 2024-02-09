@@ -2,5 +2,8 @@
   "name": "@backoffice/server",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "test": "docker exec -ti boffice_api python manage.py test"
+  }
 }

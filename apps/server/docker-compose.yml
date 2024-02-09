@@ -16,14 +16,15 @@ services:
       - POSTGRES_PASSWORD=PeeCssaasaNqAs75oiMnaonfQSpPSXib
     networks:
       - boffice
-#
-#  redis:
-#    image: redis:alpine
-#    container_name: redis
-#    volumes:
-#      - ctrabalhista_redis:/data
-#    networks:
-#      - ctrabalhista
+
+  #
+  #  redis:
+  #    image: redis:alpine
+  #    container_name: redis
+  #    volumes:
+  #      - ctrabalhista_redis:/data
+  #    networks:
+  #      - ctrabalhista
 
   api:
     build: .
