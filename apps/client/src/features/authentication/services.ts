@@ -8,6 +8,10 @@ export const login = async (username: string, password: string) => {
 };
 
 export const getAuthenticatedUser = async () => {
-  const { data } = await api.get<User>('api/users/me');
-  return data;
+  try {
+    const { data } = await api.get<User>('api/users/me');
+    return data;
+  } catch {
+    return null;
+  }
 };

@@ -1,12 +1,12 @@
+import { Outlet } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
 import { Button } from '@mui/material';
-import { NotesList } from '../components/NotesList';
-import { AddNoteDialog } from '../modals/AddNoteDialog';
 import { useQueryDialog } from '@backoffice/hooks';
-import { EditorArea } from '../components/EditorArea';
+import { NotesList } from './NotesList';
+import { AddNoteDialog } from '../modals/AddNoteDialog';
 
-const Notes = () => {
+const NotesLayout = () => {
   const { onOpen } = useQueryDialog('add');
 
   return (
@@ -21,7 +21,7 @@ const Notes = () => {
         </List>
       </Grid>
       <Grid item xs={10}>
-        <EditorArea />
+        <Outlet />
       </Grid>
 
       <AddNoteDialog />
@@ -29,4 +29,4 @@ const Notes = () => {
   );
 };
 
-export default Notes;
+export default NotesLayout;
