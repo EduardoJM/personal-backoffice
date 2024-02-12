@@ -1,39 +1,26 @@
-import {
-  MDXEditor,
-  headingsPlugin,
-  listsPlugin,
-  quotePlugin,
-  thematicBreakPlugin,
-  toolbarPlugin,
-  diffSourcePlugin,
-} from '@mdxeditor/editor';
-import { Toolbar } from './Toolbar';
+import { RefObject } from 'react';
+import { MDXEditor, MDXEditorMethods } from '@mdxeditor/editor';
+import { getPlugins } from './Plugins';
 import '@mdxeditor/editor/style.css';
+
+export interface MarkdownEditorMethods extends MDXEditorMethods {}
 
 export interface MarkdownEditorProps {
   value: string;
+  lastSaved: string;
   onChange: (value: string) => void;
+  editorRef?: RefObject<MarkdownEditorMethods>;
 }
 
 export const MarkdownEditor = (props: MarkdownEditorProps) => {
-  const { value, onChange } = props;
+  const { value, onChange, editorRef, lastSaved } = props;
 
   return (
     <MDXEditor
       markdown={value}
+      ref={editorRef}
       onChange={onChange}
-      plugins={[
-        headingsPlugin(),
-        listsPlugin(),
-        quotePlugin(),
-        thematicBreakPlugin(),
-        toolbarPlugin({
-          toolbarContents: () => <Toolbar />,
-        }),
-        diffSourcePlugin({
-          viewMode: 'rich-text',
-        }),
-      ]}
+      plugins={getPlugins(lastSaved)}
     />
   );
 };
