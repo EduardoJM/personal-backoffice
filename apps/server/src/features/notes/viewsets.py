@@ -19,7 +19,7 @@ class NoteViewSet(ModelViewSet):
     serializer_class = NoteSerializer
     filter_backends = [FullTextSearchFilter]
     search_config = "portuguese"
-    search_fields = ["text"]
+    search_fields = ["text", "title"]
     similarity_threshold = 0.3
 
     def get_queryset(self):

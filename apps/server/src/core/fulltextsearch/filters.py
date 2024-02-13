@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django.db.models.functions import Greatest
 from django.contrib.postgres.search import (
     SearchQuery,
     SearchVector,
@@ -39,6 +40,14 @@ class FullTextSearchFilter(BaseFilterBackend):
         search_vector = SearchVector(*search_fields, config=config)
         search_query = SearchQuery(search_term, config=config)
 
+        if len(search_fields) == 1:
+            similarity = TrigramSimilarity(*search_fields, search_term)
+        else:
+            similarities = map(
+                lambda field: TrigramSimilarity(field, search_term), search_fields
+            )
+            similarity = Greatest(*similarities)
+
         queryset = (
             queryset.annotate(
                 search=search_vector,
@@ -46,7 +55,7 @@ class FullTextSearchFilter(BaseFilterBackend):
                     search_vector,
                     search_query,
                 ),
-                similarity=TrigramSimilarity(*search_fields, search_term),
+                similarity=similarity,
             )
             .filter(Q(search=search_query) | Q(similarity__gt=threshold))
             .order_by("-rank", "-similarity")
