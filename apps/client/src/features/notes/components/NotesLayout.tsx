@@ -1,8 +1,11 @@
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
-import { Button } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import { Box, Button } from '@mui/material';
 import { useQueryDialog } from '@backoffice/hooks';
+import { QueryTextField } from '@backoffice/ui';
 import { NotesList } from './NotesList';
 import { AddNoteDialog } from '../modals/AddNoteDialog';
 
@@ -11,17 +14,28 @@ const NotesLayout = () => {
 
   return (
     <Grid container spacing={2} sx={{ height: '100vh' }}>
-      <Grid item xs={2}>
-        <Button variant="contained" onClick={onOpen}>
-          Q?
-        </Button>
+      <Grid item xs={12} sm={6} md={5} lg={3}>
+        <Typography variant="h3" mb={5}>
+          Anotações
+        </Typography>
+
+        <Box sx={{ display: 'flex', alignItems: 'stretch', gap: 2 }}>
+          <QueryTextField label="Buscar..." queryName="search" />
+
+          <Button variant="contained" onClick={onOpen}>
+            +
+          </Button>
+        </Box>
 
         <List sx={{ width: '100%', maxWidth: '100%', bgcolor: 'background.paper' }}>
           <NotesList />
         </List>
       </Grid>
-      <Grid item xs={10}>
-        <Outlet />
+
+      <Grid item xs={12} sm={6} md={7} lg={9}>
+        <Suspense fallback={<>Carregando...</>}>
+          <Outlet />
+        </Suspense>
       </Grid>
 
       <AddNoteDialog />

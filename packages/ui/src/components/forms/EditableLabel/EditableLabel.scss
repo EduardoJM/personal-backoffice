@@ -1,0 +1,16 @@
+.editable-label {
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+
+  .edit-button {
+    display: none;
+  }
+
+  &:hover {
+    .edit-button {
+      display: inline-block;
+    }
+  }
+}
