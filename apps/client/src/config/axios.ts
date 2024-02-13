@@ -12,15 +12,15 @@ api.interceptors.response.use(
       Promise.reject(error);
     }
     if (String(error.response.config.url).includes('auth/token/refresh')) {
-      localStorage.removeItem('@TUNELATOR_REFRESH');
-      sessionStorage.removeItem('@TUNELATOR_REFRESH');
+      localStorage.removeItem('@BOFFICE:refresh');
+      sessionStorage.removeItem('@BOFFICE:refresh');
       return Promise.reject(error);
     }
     let token: string | null = null;
-    if (localStorage.getItem('@TUNELATOR_REFRESH')) {
-      token = localStorage.getItem('@TUNELATOR_REFRESH');
-    } else if (sessionStorage.getItem('@TUNELATOR_REFRESH')) {
-      token = sessionStorage.getItem('@TUNELATOR_REFRESH');
+    if (localStorage.getItem('@BOFFICE:refresh')) {
+      token = localStorage.getItem('@BOFFICE:refresh');
+    } else if (sessionStorage.getItem('@BOFFICE:refresh')) {
+      token = sessionStorage.getItem('@BOFFICE:refresh');
     }
     if (!token) {
       return Promise.reject(error);
@@ -28,6 +28,7 @@ api.interceptors.response.use(
     api.defaults.headers.common['Authorization'] = '';
     try {
       const data = await refreshToken(token);
+      console.log(data);
       api.defaults.headers.common['Authorization'] = `Bearer ${data.access}`;
       return api.request({
         ...error.response.config,
@@ -37,8 +38,8 @@ api.interceptors.response.use(
         },
       });
     } catch {
-      localStorage.removeItem('@TUNELATOR_REFRESH');
-      sessionStorage.removeItem('@TUNELATOR_REFRESH');
+      localStorage.removeItem('@BOFFICE:refresh');
+      sessionStorage.removeItem('@BOFFICE:refresh');
     }
   }
 );

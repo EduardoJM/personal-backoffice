@@ -20,7 +20,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const navigate = useNavigate();
 
   const handleLogin = (data: LoginResponse): void => {
-    localStorage.setItem('@GALLERY:token', data.access);
+    localStorage.setItem('@BOFFICE:token', data.access);
+    localStorage.setItem('@BOFFICE:refresh', data.refresh);
     api.defaults.headers.common['Authorization'] = `Bearer ${data.access}`;
     //setUser(data.user);
     setUser({ email: '', first_name: '', id: 1, last_name: '' });
@@ -28,7 +29,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   };
 
   const handleLogout = (): void => {
-    localStorage.removeItem('@GALLERY:token');
+    localStorage.removeItem('@BOFFICE:token');
+    localStorage.removeItem('@BOFFICE:refresh');
     api.defaults.headers.common['Authorization'] = undefined;
     setUser(null);
     navigate('/auth');
