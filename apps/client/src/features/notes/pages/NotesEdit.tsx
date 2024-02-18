@@ -7,7 +7,7 @@ import { useSaveNoteContent } from '../mutations/useSaveNoteContent';
 const NotesEdit = () => {
   const { id } = useParams();
   const { data: initialText } = useNoteText(id || '');
-  const [text, setText] = useState(initialText || '');
+  const [text, setText] = useState(initialText || '\r\n\r\n');
   const editorRef = useRef<MarkdownEditorMethods>(null);
   const { mutate: saveContent } = useSaveNoteContent();
 
